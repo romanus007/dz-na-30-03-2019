@@ -1,7 +1,4 @@
 package application;
-	
-
-
 import java.util.Random;
 
 import javafx.animation.KeyFrame;
@@ -22,55 +19,46 @@ public class Main extends Application {
 	int x =0;
 	int y =0;
 	
-	// размер пол¤
 	private static final int width = 800;
 	private static final int height = 600;
-	
-	// ширина и высота ракетка
+
 	private static final int RACKET_WIDTH = 10;
 	private static final int RACKET_HEIGHT = 90;
 	
-	// радиус м¤ча
 	private static final int BALL_RAD = 30;
 	
-	// начальные координаты ракетки игрока
 	double playerX=0;
 	double playerY = height/2;
 	
-	// начальные координаты ракетки компа
 	double compX = width - RACKET_WIDTH;
 	double compY = height/2;
 	
-	// координаты м¤ча
 	double ballX = width/2;
 	double ballY = height/2;
 	
-	// инструмент рисовани¤
 	GraphicsContext gc;
 	
-	// скорость м¤ча
 	double ballYSpeed = 1;
 	double ballXSpeed =3;
 	
-	// игровой цикл
 	boolean gameStarted;
 	
 	private void drawTable() {
-		// рисуем поле
+
 		gc.setFill(Color.GREEN);
 		gc.fillRect(0, 0, width, height);			
-		// рисуем разделительную линию
+
 		gc.setFill(Color.YELLOW);
 		gc.fillRect(width/2, 0, 2, height);		
-		// рисуем м¤ч
+
 		gc.setStroke(Color.YELLOW);
 		gc.setTextAlign(TextAlignment.CENTER);
-		gc.strokeText("Счёт " +"0:"+x, width/4, height/4);	
-		gc.strokeText("Вы отбили "+y+" раз", width/4, height/4 +40);	
+		gc.strokeText("Score " +"0:"+x, width/4, height/4);	
+		gc.strokeText("you hit the ball "+y+" times", width/4, height/4 +40);	
 		if(gameStarted) {
 			ballX+=ballXSpeed;
 			ballY+=ballYSpeed;
-			// логика - комп отбивает м¤ч
+
 			if(ballX < width-width/8) {
 				compY = ballY - RACKET_HEIGHT/2;
 			}
@@ -92,7 +80,7 @@ public class Main extends Application {
 				}
 			}
 			if (ballXSpeed == 0 && ballYSpeed == 0 ) {
-				gc.strokeText("Вы проиграли", width/4, height/4 +80);
+				gc.strokeText("You lose", width/4, height/4 +80);
 				}
 			if (ballY<0) {
 				ballYSpeed=-1*ballYSpeed;
@@ -105,7 +93,7 @@ public class Main extends Application {
 			gc.strokeText("Click to start", width/4, height/4 -40);	
 		}
 	
-		// рисуем ракетки
+
 		gc.fillRect(playerX, playerY, RACKET_WIDTH, RACKET_HEIGHT);
 		gc.fillRect(compX, compY, RACKET_WIDTH, RACKET_HEIGHT);	
 	}
